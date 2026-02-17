@@ -8,6 +8,21 @@ import torch
 from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, transforms
 
+DATASET_REPO = "easydub/EasyDUB-dataset"
+DEFAULT_CACHE = Path.home() / ".cache" / "easydub" / "EasyDUB-dataset"
+
+
+def ensure_dataset(data_dir: Optional[Path] = None) -> Path:
+    """Return a local path to the EasyDUB dataset, downloading from HuggingFace if needed."""
+    path = Path(data_dir) if data_dir is not None else DEFAULT_CACHE
+    if (path / "margins").is_dir():
+        return path
+    print(f"Downloading EasyDUB dataset to {path} ...")
+    from huggingface_hub import snapshot_download
+
+    snapshot_download(repo_id=DATASET_REPO, repo_type="dataset", local_dir=str(path))
+    return path
+
 
 def get_cifar_dataloader(
     data_root: Path,

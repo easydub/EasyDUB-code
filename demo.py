@@ -7,6 +7,7 @@ import numpy as np
 import torch
 
 from easydub.data import (
+    ensure_dataset,
     get_cifar_dataloader,
     load_forget_indices,
     load_margins_array,
@@ -21,13 +22,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--data-dir",
         type=Path,
-        required=True,
-        help="Path to EasyDUB-dataset root (containing models/, logits/, margins/, forget_sets/).",
+        default=None,
+        help="Path to EasyDUB-dataset root. If omitted, downloads from HuggingFace automatically.",
     )
     parser.add_argument(
         "--method",
         type=str,
-        default="ascent_forget",
+        default="noisy_descent",
         choices=sorted(UNLEARNING_METHODS.keys()),
         help="Unlearning method to run.",
     )
@@ -67,7 +68,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
 
-    data_root = args.data_dir
+    data_root = ensure_dataset(args.data_dir)
     device = args.device
 
     print(f"Using data root: {data_root}")

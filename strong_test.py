@@ -8,6 +8,7 @@ import numpy as np
 import torch
 
 from easydub.data import (
+    ensure_dataset,
     get_cifar_dataloader,
     load_forget_indices,
     load_margins_array,
@@ -24,8 +25,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--data-dir",
         type=Path,
-        required=True,
-        help="Path to EasyDUB-dataset root (with models/, margins/, logits/, forget_sets/).",
+        default=None,
+        help="Path to EasyDUB-dataset root. If omitted, downloads from HuggingFace automatically.",
     )
     parser.add_argument(
         "--forget-set",
@@ -95,7 +96,7 @@ def main() -> None:
     args = parse_args()
     set_seed(args.seed)
 
-    data_root = args.data_dir
+    data_root = ensure_dataset(args.data_dir)
     device = args.device
 
     print("Strong noisy-SGD unlearning test")

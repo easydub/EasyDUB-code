@@ -90,8 +90,8 @@ def klom_from_margins(
         oracle_arr = oracle_margins[:, idx].cpu().numpy()
         unlearned_arr = unlearned_margins[:, idx].cpu().numpy()
         kl = binned_kl_divergence(
-            p_samples=unlearned_arr,
-            q_samples=oracle_arr,
+            p_samples=oracle_arr,
+            q_samples=unlearned_arr,
             min_val=clip_min,
             max_val=clip_max,
         )

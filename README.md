@@ -3,6 +3,7 @@
 </p>
 
 <h1 align="center">EasyDUB</h1>
+<h3 align="center">Easy <b>D</b>ata <b>U</b>nlearning <b>B</b>ench</h3>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License"></a>

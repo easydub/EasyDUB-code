@@ -26,10 +26,10 @@ Run the demo with a single command -- the dataset downloads automatically on fir
 
 ```bash
 git clone https://github.com/easydub/EasyDUB-code.git && cd EasyDUB-code
-uv run python demo.py --method noisy_descent --forget-set 1 --n-models 10
+uv run python demo.py --method noisy_descent --forget-set 1 --n-models 100
 ```
 
-This runs noisy-SGD unlearning on 10 pretrain models for forget set 1 and prints KLOM scores against the oracle. No separate install or dataset download step needed.
+This runs noisy-SGD unlearning on 100 pretrain models for forget set 1 and prints KLOM scores against the oracle. No separate install or dataset download step needed.
 
 You can also compute KLOM from precomputed margins directly (no GPU required):
 
@@ -39,7 +39,7 @@ from easydub.eval import klom_from_margins
 import numpy as np, torch
 
 root = ensure_dataset()  # downloads once, then caches
-n_models = 10
+n_models = 100
 
 pretrain = torch.from_numpy(np.stack([
     load_margins_array(root, kind="pretrain", phase="val", forget_id=None, model_id=i)
@@ -88,7 +88,7 @@ If you use EasyDUB in your work, please cite:
 
 ```bibtex
 @inproceedings{rinberg2025dataunlearnbench,
-  title     = {Data-Unlearn-Bench: Making Evaluating Data Unlearning Easy},
+  title     = {Easy Data Unlearning Bench},
   author    = {Rinberg, Roy and Puigdemont, Pol and Pawelczyk, Martin and Cevher, Volkan},
   booktitle = {MUGEN Workshop at ICML},
   year      = {2025},

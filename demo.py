@@ -105,31 +105,14 @@ def main() -> None:
     # Load pretrain models
     pretrain_models = load_pretrain_checkpoints(data_root, n_models=args.n_models, device=device)
 
-    # Load oracle margins for this forget set (train + val concatenated)
+    # Load oracle margins for this forget set (retain + forget + val concatenated)
+    load_oracle = lambda phase, mid: load_margins_array(
+        data_root, kind="oracle", phase=phase, forget_id=args.forget_set, model_id=mid,
+    )
     oracle_margins_list = []
     for model_id in range(len(pretrain_models)):
-        m_retain = load_margins_array(
-            data_root,
-            kind="oracle",
-            phase="retain",
-            forget_id=args.forget_set,
-            model_id=model_id,
-        )
-        m_forget = load_margins_array(
-            data_root,
-            kind="oracle",
-            phase="forget",
-            forget_id=args.forget_set,
-            model_id=model_id,
-        )
-        m_val = load_margins_array(
-            data_root,
-            kind="oracle",
-            phase="val",
-            forget_id=args.forget_set,
-            model_id=model_id,
-        )
-        oracle_margins_list.append(np.concatenate([m_retain, m_forget, m_val], axis=0))
+        m = np.concatenate([load_oracle(p, model_id) for p in ("retain", "forget", "val")])
+        oracle_margins_list.append(m)
     oracle_margins = torch.from_numpy(np.stack(oracle_margins_list, axis=0))
 
     # Run unlearning and compute margins

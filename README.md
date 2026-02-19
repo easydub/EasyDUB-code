@@ -88,11 +88,14 @@ uv run python strong_test.py --forget-set 1 --n-models 100
 If you use EasyDUB in your work, please cite:
 
 ```bibtex
-@inproceedings{rinberg2025dataunlearnbench,
-  title     = {Easy Data Unlearning Bench},
-  author    = {Rinberg, Roy and Puigdemont, Pol and Pawelczyk, Martin and Cevher, Volkan},
-  booktitle = {MUGEN Workshop at ICML},
-  year      = {2025},
+@misc{rinberg2026easydataunlearningbench,
+      title={Easy Data Unlearning Bench},
+      author={Roy Rinberg and Pol Puigdemont and Martin Pawelczyk and Volkan Cevher},
+      year={2026},
+      eprint={2602.16400},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2602.16400},
 }
 ```
 

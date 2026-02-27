@@ -1,0 +1,33 @@
+[project]
+name = "easydub"
+version = "0.1.0"
+description = "EasyDUB: a minimal CIFAR-10 KLOM benchmark for data unlearning."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Pol Puigdemont"},
+    {name = "Roy Rinberg"},
+    {name = "Martin Pawelczyk"},
+    {name = "Volkan Cevher"},
+]
+dependencies = [
+    "huggingface-hub>=1.4.1",
+    "matplotlib>=3.10.8",
+    "numpy",
+    "torch",
+    "torchvision",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+]
+
+[tool.setuptools]
+packages = ["easydub"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+

@@ -15,13 +15,13 @@ A minimal CIFAR-10 benchmark for evaluating data-unlearning methods using **KLOM
 
 ---
 
-* [Getting Started](#getting-started)
+* [Getting Started](#getting-started-with-uv)
 * [KLOM Metric](#klom-metric)
 * [Reproducing Compute vs KLOM](#reproducing-compute-vs-klom)
 * [Citation](#citation)
 * [License](#license)
 
-## Getting Started
+## Getting Started (with [uv](https://docs.astral.sh/uv/))
 
 Evaluate pretrain models against the oracle baseline with a single command -- the dataset downloads automatically on first run:
 

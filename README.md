@@ -8,6 +8,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-%3E%3D3.11-blue.svg?style=flat-square" alt="Python >= 3.11"></a>
   <a href="https://huggingface.co/datasets/easydub/EasyDUB-dataset"><img src="https://img.shields.io/badge/-Dataset-gray.svg?logo=huggingface&style=flat-square" alt="Dataset on HuggingFace"></a>
+  <a href="https://arxiv.org/abs/2602.16400"><img src="https://img.shields.io/badge/arXiv-2602.16400-b31b1b.svg?style=flat-square" alt="arXiv"></a>
 </p>
 
 A minimal CIFAR-10 benchmark for evaluating data-unlearning methods using **KLOM** (KL-divergence of Margins). Ships with 200 pretrain models, 2,000 oracle models, and precomputed margins -- everything needed to score a new method in a few lines of code.
@@ -84,11 +85,14 @@ If you use KLOM in your work, please cite:
 If you use the EasyDUB benchmark, please also cite:
 
 ```bibtex
-@inproceedings{rinberg2025dataunlearnbench,
-  title     = {Data-Unlearn-Bench: Making Evaluating Data Unlearning Easy},
-  author    = {Rinberg, Roy and Puigdemont, Pol and Pawelczyk, Martin and Cevher, Volkan},
-  booktitle = {MUGEN Workshop at ICML},
-  year      = {2025},
+@misc{rinberg2026easydataunlearningbench,
+      title={Easy Data Unlearning Bench},
+      author={Roy Rinberg and Pol Puigdemont and Martin Pawelczyk and Volkan Cevher},
+      year={2026},
+      eprint={2602.16400},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2602.16400},
 }
 ```
 

@@ -58,9 +58,9 @@ KLOM bins these margins across models and computes a per-sample KL divergence be
   <img src="assets/compute_vs_klom.png" width="700" alt="Compute vs KLOM">
 </p>
 
-The figure shows how P95 KLOM evolves as retrained models see more of the retain set, compared to pretrain and oracle baselines.
+The figure shows how P95 KLOM evolves as retrained models see more of the retain set. The dashed gray line marks the pretrain baseline and the red star marks the oracle (100% compute, 0 KLOM by definition).
 
-Train the full grid (4 noise levels x 3 seeds, requires GPU) and generate the plot in one step:
+Train retrained models (3 seeds, requires GPU) and generate the plot in one step:
 
 ```bash
 uv run python reproduce.py --data-dir /path/to/EasyDUB-dataset

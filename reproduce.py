@@ -1,6 +1,6 @@
 """Reproduce the Compute vs KLOM figure end-to-end.
 
-Trains a grid of models (4 noise levels x 3 seeds) via train_models.py,
+Trains retrained models (3 seeds by default) via train_models.py,
 then generates the 1x3 P95 figure to assets/compute_vs_klom.png.
 
 Usage:
@@ -23,7 +23,7 @@ from easydub.eval import klom_from_margins, load_margins_matrix
 
 TRAIN_SCRIPT = str(Path(__file__).resolve().parent / "train_models.py")
 
-DEFAULT_NOISE_STDS = [0.0, 0.005, 0.01, 0.05]
+DEFAULT_NOISE_STDS = [0.0]
 DEFAULT_SEEDS = [0, 1, 2]
 SPLITS = ["retain", "forget", "val"]
 SPLIT_LABELS = {"retain": "Retain", "forget": "Forget", "val": "Validation"}
@@ -170,10 +170,10 @@ def plot_klom(args):
         ax.axhline(pt_val, color=pretrain_color, ls="--", lw=1.2,
                     label="Pretrain", zorder=2)
 
-        # Oracle baseline (horizontal)
-        or_val = baselines[split]["oracle_p95"]
-        ax.axhline(or_val, color=oracle_color, ls=":", lw=1.2,
-                    label="Oracle", zorder=2)
+        # Red star for oracle (100% compute, 0 KLOM by definition)
+        ax.plot(100, 0, marker="*", color=oracle_color, markersize=14,
+                zorder=10, label="Oracle", linestyle="None",
+                clip_on=False)
 
         # Cosmetics
         ax.set_xlim(0, 100)
@@ -187,9 +187,16 @@ def plot_klom(args):
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
 
-    # Single legend at top
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", ncol=3,
+    # Single legend at top — collect from all axes to include the star
+    all_handles, all_labels = [], []
+    seen = set()
+    for ax in axes:
+        for h, l in zip(*ax.get_legend_handles_labels()):
+            if l not in seen:
+                all_handles.append(h)
+                all_labels.append(l)
+                seen.add(l)
+    fig.legend(all_handles, all_labels, loc="upper center", ncol=4,
                fontsize=10, frameon=False, bbox_to_anchor=(0.5, 1.05))
 
     # Ensure output directory exists
